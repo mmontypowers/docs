@@ -19,23 +19,23 @@
 #
 #
 
-load("@graknlabs_common//test:rules.bzl", "grakn_java_test", "native_grakn_artifact")
+load("@vaticle_typedb_common//test:rules.bzl", "typedb_java_test", "native_typedb_artifact")
 
 ############################
 # Phone Calls Example Test #
 ############################
 
-native_grakn_artifact(
+native_typedb_artifact(
     name = "native-grakn-artifact",
-    mac_artifact = "@graknlabs_grakn_core_artifact_mac//file",
-    linux_artifact = "@graknlabs_grakn_core_artifact_linux//file",
-    windows_artifact = "@graknlabs_grakn_core_artifact_windows//file",
+    mac_artifact = "@vaticle_typedb_artifact_mac//file",
+    linux_artifact = "@vaticle_typedb_artifact_linux//file",
+    windows_artifact = "@vaticle_typedb_artifact_windows//file",
     output = "grakn-core-server-native.tar.gz",
     visibility = ["//test:__subpackages__"],
 )
 
 
-grakn_java_test(
+typedb_java_test(
     name = "phone-calls",
     test_class = "grakn.doc.test.example.PhoneCallsTest",
     srcs = [
@@ -43,19 +43,19 @@ grakn_java_test(
         ":phone-calls-tests",
     ],
     deps = [
-        "@graknlabs_client_java//:client-java",
-        "@graknlabs_client_java//api",
-        "@graknlabs_graql//java:graql",
-        "@graknlabs_graql//java/common",
-        "@graknlabs_graql//java/query",
+        "@vaticle_typedb_client_java//:client-java",
+        "@vaticle_typedb_client_java//api",
+        "@vaticle_typeql_lang_java//:typeql-lang",
+        "@vaticle_typeql_lang_java//common",
+        "@vaticle_typeql_lang_java//query",
         "@maven//:org_sharegov_mjson",
         "@maven//:com_google_code_gson_gson",
         "@maven//:com_univocity_univocity_parsers",
         "@maven//:javax_xml_stream_stax_api",
     ],
-    server_mac_artifact = "@graknlabs_grakn_core_artifact_mac//file",
-    server_linux_artifact = "@graknlabs_grakn_core_artifact_linux//file",
-    server_windows_artifact = "@graknlabs_grakn_core_artifact_windows//file",
+    server_mac_artifact = "@vaticle_typedb_artifact_mac//file",
+    server_linux_artifact = "@vaticle_typedb_artifact_linux//file",
+    server_windows_artifact = "@vaticle_typedb_artifact_windows//file",
     data = [
         "//files:phone-calls-kg",
     ]
@@ -85,7 +85,7 @@ genrule(
 ###################################
 # social_network Standalones Test #
 ###################################
-grakn_java_test(
+typedb_java_test(
     name = "social-network",
     test_class = "grakn.doc.test.example.SocialNetworkTest",
     srcs = [
@@ -93,15 +93,15 @@ grakn_java_test(
         ":social-network-tests",
     ],
     deps = [
-        "@graknlabs_client_java//:client-java",
-        "@graknlabs_client_java//api",
-        "@graknlabs_graql//java:graql",
-        "@graknlabs_graql//java/query",
-        "@graknlabs_graql//java/common",
+        "@vaticle_typedb_client_java//:client-java",
+        "@vaticle_typedb_client_java//api",
+        "@vaticle_typeql_lang_java//:typeql-lang",
+        "@vaticle_typeql_lang_java//query",
+        "@vaticle_typeql_lang_java//common",
     ],
-    server_mac_artifact = "@graknlabs_grakn_core_artifact_mac//file",
-    server_linux_artifact = "@graknlabs_grakn_core_artifact_linux//file",
-    server_windows_artifact = "@graknlabs_grakn_core_artifact_windows//file",
+    server_mac_artifact = "@vaticle_typedb_artifact_mac//file",
+    server_linux_artifact = "@vaticle_typedb_artifact_linux//file",
+    server_windows_artifact = "@vaticle_typedb_artifact_windows//file",
     data = [
         "//files:social-network-kg",
     ]

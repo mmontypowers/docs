@@ -19,14 +19,14 @@
 #
 #
 
-load("@graknlabs_common//test:rules.bzl", "grakn_java_test", "native_grakn_artifact")
+load("@vaticle_typedb_common//test:rules.bzl", "typedb_java_test", "native_typedb_artifact")
 
 
-native_grakn_artifact(
+native_typedb_artifact(
     name = "native-grakn-artifact",
-    mac_artifact = "@graknlabs_grakn_core_artifact_mac//file",
-    linux_artifact = "@graknlabs_grakn_core_artifact_linux//file",
-    windows_artifact = "@graknlabs_grakn_core_artifact_windows//file",
+    mac_artifact = "@vaticle_typedb_artifact_mac//file",
+    linux_artifact = "@vaticle_typedb_artifact_linux//file",
+    windows_artifact = "@vaticle_typedb_artifact_windows//file",
     output = "grakn-core-server-native.tar.gz",
     visibility = ["//test:__subpackages__"],
 )
@@ -34,21 +34,21 @@ native_grakn_artifact(
 #########################
 # Graql Java Query Test #
 #########################
-grakn_java_test(
+typedb_java_test(
     name = "graql-java",
     test_class = "grakn.doc.test.query.GraqlJavaTest",
     srcs = [":graql-java-tests"],
     deps = [
-        "@graknlabs_client_java//:client-java",
-        "@graknlabs_client_java//api",
-        "@graknlabs_graql//java:graql",
-        "@graknlabs_graql//java/common",
-        "@graknlabs_graql//java/pattern",
-        "@graknlabs_graql//java/query",
+        "@vaticle_typedb_client_java//:client-java",
+        "@vaticle_typedb_client_java//api",
+        "@vaticle_typeql_lang_java//:typeql-lang",
+        "@vaticle_typeql_lang_java//common",
+        "@vaticle_typeql_lang_java//pattern",
+        "@vaticle_typeql_lang_java//query",
     ],
-    server_mac_artifact = "@graknlabs_grakn_core_artifact_mac//file",
-    server_linux_artifact = "@graknlabs_grakn_core_artifact_linux//file",
-    server_windows_artifact = "@graknlabs_grakn_core_artifact_windows//file",
+    server_mac_artifact = "@vaticle_typedb_artifact_mac//file",
+    server_linux_artifact = "@vaticle_typedb_artifact_linux//file",
+    server_windows_artifact = "@vaticle_typedb_artifact_windows//file",
     data = [
         "//files:social-network-kg", # filegroup defined in files/BUILD
         "//files:phone-calls-kg", # filegroup defined in files/BUILD
@@ -71,20 +71,20 @@ genrule(
 #########################
 # Graql Lang Query Test #
 #########################
-grakn_java_test(
+typedb_java_test(
     name = "graql-lang",
     test_class = "grakn.doc.test.query.GraqlLangTest",
     srcs = [":graql-lang-tests"],
     deps = [
-        "@graknlabs_client_java//:client-java",
-        "@graknlabs_client_java//api",
-        "@graknlabs_graql//java:graql",
-        "@graknlabs_graql//java/query",
-        "@graknlabs_graql//java/pattern"
+        "@vaticle_typedb_client_java//:client-java",
+        "@vaticle_typedb_client_java//api",
+        "@vaticle_typeql_lang_java//:typeql-lang",
+        "@vaticle_typeql_lang_java//query",
+        "@vaticle_typeql_lang_java//pattern"
     ],
-    server_mac_artifact = "@graknlabs_grakn_core_artifact_mac//file",
-    server_linux_artifact = "@graknlabs_grakn_core_artifact_linux//file",
-    server_windows_artifact = "@graknlabs_grakn_core_artifact_windows//file",
+    server_mac_artifact = "@vaticle_typedb_artifact_mac//file",
+    server_linux_artifact = "@vaticle_typedb_artifact_linux//file",
+    server_windows_artifact = "@vaticle_typedb_artifact_windows//file",
     data = [
         "//files:social-network-kg", # filegroup defined in files/BUILD
         "//files:phone-calls-kg", # filegroup defined in files/BUILD
